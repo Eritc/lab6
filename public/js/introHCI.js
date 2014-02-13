@@ -25,8 +25,17 @@ function addProjectDetails(e) {
 	var projectID = $(this).closest('.project').attr('id');
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
-
+	$.get("/project/"+idNumber, callBack);
+	
+	
+	console.log(projectID);
 	console.log("User clicked on project " + idNumber);
+}
+
+function callBack(result)
+{
+	var html = "<a href='#' class = 'thumbnail'>" + '<img src = "' + result['image'] + '" class = "detailsImage"' + "<p>" + result['title'] + "</p>" + "<p>" + result['date'] + "</p>" + "<p>" + result['summary'] + "</p>"
+	$('#project'+result['id']).find('.details').html(html);
 }
 
 /*
@@ -34,5 +43,12 @@ function addProjectDetails(e) {
  * and apply it
  */
 function randomizeColors(e) {
+
+	$.get("/palette", colorCallBack);
 	console.log("User clicked on color button");
+}
+
+function colorCallBack(result)
+{
+	
 }
